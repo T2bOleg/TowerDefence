@@ -36,7 +36,7 @@ namespace TowerDefence
             // timer1
             // 
             this.timer1.Enabled = true;
-            this.timer1.Interval = 16;
+            this.timer1.Interval = 30;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // TowerDefence
@@ -49,6 +49,7 @@ namespace TowerDefence
             this.Load += new System.EventHandler(this.TowerDefence_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.TowerDefence_Paint);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TowerDefence_MouseDown);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.TowerDefence_MouseMove);
             this.ResumeLayout(false);
 
         }
