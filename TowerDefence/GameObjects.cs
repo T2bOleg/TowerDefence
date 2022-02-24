@@ -82,6 +82,7 @@ namespace TowerDefence
             size = new Size(60, 60);
             _obj.objs.Add(this);
             _obj.checkpoints.Add(this);
+
         }
 
 
@@ -153,7 +154,7 @@ namespace TowerDefence
         {
             init(_obj, g, p);
             targ = _obj.checkpoints[numTarg].pos;
-            spd = 2; dam = 2; maxXp = 80 + (_obj.Lavle / 4); xp = maxXp; usd = 18;
+            spd = 2; dam = 2; maxXp = 200 + (_obj.Lavle / 4); xp = maxXp; usd = 18;
             _obj.enemies.Add(this);
         }
         public override void Render()
@@ -174,7 +175,7 @@ namespace TowerDefence
         {
             init(_obj, g, p);
             targ = _obj.checkpoints[numTarg].pos;
-            spd = 3; dam = 3; maxXp = 50 + (_obj.Lavle / 4); xp = maxXp; usd = 21;
+            spd = 3; dam = 3; maxXp = 120 + (_obj.Lavle / 4); xp = maxXp; usd = 21;
             _obj.enemies.Add(this);
         }
 
@@ -211,6 +212,7 @@ namespace TowerDefence
             dist = Data.dist[type, lavle];
             kd = Data.kd[type, lavle];
             damage = Data.damage[type, lavle];
+            
         }
 
         public override void Click()
@@ -230,11 +232,11 @@ namespace TowerDefence
             {
                 g.DrawImage(sprite, new Rectangle(pos.X - 16, pos.Y - 16, 32, 32));
                 if (type == 1)
-                    g.DrawLine(new Pen(Color.Red), pos, enemy.pos);
+                    g.DrawLine(new Pen(Data.LaserColor[lavle]), pos, enemy.pos);
                 else if (type == 2)
                     g.DrawEllipse(new Pen(Color.FromArgb(50, 234, 255, 3)), pos.X - dist, pos.Y - dist, dist * 2, dist * 2);
                 else
-                    g.DrawEllipse(new Pen(Color.FromArgb(150, 234, 50, 50)), enemy.pos.X - 18, enemy.pos.Y - 18, 36, 36);
+                    g.DrawEllipse(new Pen(Color.FromArgb(150, 234, 255-(lavle*50), 255 - (lavle * 50))), enemy.pos.X - 18, enemy.pos.Y - 18, 36, 36);
             }
 
             if (isSelected())
@@ -286,7 +288,6 @@ namespace TowerDefence
             }
             else
             {
-                ;
                 List<Enemy> enemies = _obj.enemies.FindAll(Enemy => Dist(Enemy.pos, pos) <= dist);
                 if (enemies.Count > 0)
                 {
@@ -341,8 +342,9 @@ namespace TowerDefence
         public static Image[] spr = { new Bitmap(1, 1), Resources.PVOSprite, Resources.PressSprite, Resources.BahaSprite };
         public static int[,] prise = { { 0, 0, 0, 0, 0 }, { 100, 175, 650, 1900, 2500 }, { 175, 350, 1000, 2000, 3000 }, { 225, 400, 1350, 2250, 3500 } };
         public static int[,] dist = { { 0, 0, 0, 0, 0 }, { 65, 66, 67, 68, 70 }, { 45, 45, 45, 48, 49 }, { 80, 85, 88, 90, 90 } };
-        public static int[,] damage = { { 0, 0, 0, 0, 0 }, { 5, 6, 9, 5, 6 }, { 6, 7, 8, 8, 9 }, { 15, 15, 15, 16, 18 } };
-        public static int[,] kd = { { 0, 0, 0, 0, 0 }, { 8, 8, 7, 5, 4 }, { 6, 6, 5, 4, 4 }, { 12, 11, 10, 9, 7 } };
+        public static int[,] damage = { { 0, 0, 0, 0, 0 }, { 20, 25, 30, 10, 20 }, { 6, 7, 8, 8, 9 }, { 80, 80, 80, 140, 140 } };
+        public static int[,] kd = { { 0, 0, 0, 0, 0 }, { 15, 15, 14, 7, 6 }, { 6, 6, 5, 4, 4 }, { 40, 35, 29, 40, 35 } };
+        public static Color[] LaserColor = { Color.Orange, Color.Aqua, Color.Green, Color.White, Color.MediumVioletRed };
 
     }
 

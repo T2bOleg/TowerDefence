@@ -40,7 +40,7 @@ namespace TowerDefence
             _obj.checkpoints.Clear();
             _obj.objs.Clear();
             _obj.XP = 100;
-            _obj.USD = 250;
+            _obj.USD = 10250;
             _obj.delList.Clear();
             img = new Bitmap(Size.Width, Size.Height);
             gf = Graphics.FromImage(img);
